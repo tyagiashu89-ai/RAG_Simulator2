@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ankit Tyagi | Futuristic Resume</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Orbitron:wght@500;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+    }
+
+    :root {
+      --bg: #050816;
+      --card: rgba(17, 25, 40, 0.75);
+      --border: rgba(255, 255, 255, 0.08);
+      --primary: #00f5ff;
+      --secondary: #8b5cf6;
+      --text: #e5f4ff;
+      --muted: #9db4c9;
+      --glow: 0 0 20px rgba(0, 245, 255, 0.4);
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: radial-gradient(circle at top left, #101f46 0%, #050816 40%),
+                  radial-gradient(circle at bottom right, #16092d 0%, transparent 35%),
+                  #050816;
+      color: var(--text);
+      overflow-x: hidden;
+      min-height: 100vh;
+    }
+
+    .bg-grid {
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+      background-size: 40px 40px;
+      z-index: -2;
+    }
+
+    .glow {
+      position: fixed;
+      width: 500px;
+      height: 500px;
+      border-radius: 50%;
+      background: rgba(0, 245, 255, 0.08);
+      filter: blur(80px);
+      z-index: -1;
+      animation: float 8s ease-in-out infinite alternate;
+    }
+
+    .glow.one {
+      top: -120px;
+      left: -100px;
+    }
+
+    .glow.two {
+      right: -100px;
+      bottom: -120px;
+      background: rgba(139, 92, 246, 0.08);
+      animation-delay: 2s;
+    }
+
+    @keyframes float {
+      from {
+        transform: translateY(0px) translateX(0px);
+      }
+      to {
+        transform: translateY(30px) translateX(20px);
+      }
+    }
+
+    .container {
+      width: min(1200px, 92%);
+      margin: auto;
+      padding: 40px 0 80px;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: 1.3fr 0.7fr;
+      gap: 30px;
+      align-items: center;
+      margin-bottom: 30px;
+    }
+
+    .glass {
+      background: var(--card);
+      border: 1px solid var(--border);
+      backdrop-filter: blur(14px);
+      border-radius: 24px;
+      padding: 30px;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 16px;
+      border-radius: 999px;
+      background: rgba(0, 245, 255, 0.1);
+      border: 1px solid rgba(0,245,255,0.25);
+      color: var(--primary);
+      font-size: 13px;
+      margin-bottom: 18px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: clamp(2.8rem, 6vw, 5rem);
+      line-height: 1;
+      margin-bottom: 18px;
+      text-shadow: var(--glow);
+    }
+
+    .gradient {
+      background: linear-gradient(90deg, var(--primary), #9d7bff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .subtitle {
+      font-size: 1.15rem;
+      color: var(--muted);
+      line-height: 1.7;
+      max-width: 700px;
+    }
+
+    .hero-right {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .stat {
+      padding: 20px;
+      border-radius: 20px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.05);
+    }
+
+    .stat h2 {
+      font-size: 2rem;
+      color: var(--primary);
+      margin-bottom: 6px;
+    }
+
+    .section {
+      margin-top: 30px;
+    }
+
+    .section-title {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1.4rem;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: white;
+    }
+
+    .section-title::before {
+      content: '';
+      width: 50px;
+      height: 3px;
+      border-radius: 20px;
+      background: linear-gradient(90deg, var(--primary), var(--secondary));
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+
+    .experience-card,
+    .project-card,
+    .skill-card,
+    .contact-card {
+      position: relative;
+      overflow: hidden;
+      transition: all 0.3s ease;
+    }
+
+    .experience-card:hover,
+    .project-card:hover,
+    .skill-card:hover,
+    .contact-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 0 30px rgba(0,245,255,0.12);
+    }
+
+    .experience-card::after,
+    .project-card::after,
+    .skill-card::after,
+    .contact-card::after {
+      content: '';
+      position: absolute;
+      width: 180px;
+      height: 180px;
+      background: radial-gradient(circle, rgba(0,245,255,0.15), transparent 70%);
+      top: -70px;
+      right: -70px;
+    }
+
+    .role {
+      font-size: 1.3rem;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+
+    .company {
+      color: var(--primary);
+      font-weight: 500;
+      margin-bottom: 12px;
+    }
+
+    .duration {
+      color: var(--muted);
+      font-size: 0.9rem;
+      margin-bottom: 14px;
+    }
+
+    ul {
+      padding-left: 18px;
+      line-height: 1.8;
+      color: var(--muted);
+    }
+
+    .skills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .skill {
+      padding: 12px 16px;
+      border-radius: 14px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      color: white;
+      font-weight: 500;
+      transition: 0.3s ease;
+    }
+
+    .skill:hover {
+      background: rgba(0,245,255,0.1);
+      border-color: rgba(0,245,255,0.3);
+      transform: scale(1.05);
+    }
+
+    .project-title {
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+
+    .project-tech {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 16px;
+    }
+
+    .project-tech span {
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(139,92,246,0.14);
+      color: #d8c6ff;
+      font-size: 0.85rem;
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+    }
+
+    .contact-card h3 {
+      margin-bottom: 10px;
+      color: var(--primary);
+    }
+
+    .contact-card p,
+    .contact-card a {
+      color: var(--muted);
+      text-decoration: none;
+      line-height: 1.6;
+    }
+
+    .footer {
+      text-align: center;
+      margin-top: 40px;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .pulse {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: #00ff88;
+      box-shadow: 0 0 10px #00ff88;
+      animation: pulse 1.5s infinite;
+    }
+
+    @keyframes pulse {
+      0% {
+        transform: scale(1);
+        opacity: 1;
+      }
+      50% {
+        transform: scale(1.5);
+        opacity: 0.5;
+      }
+      100% {
+        transform: scale(1);
+        opacity: 1;
+      }
+    }
+
+    .floating-btn {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      color: black;
+      border: none;
+      font-size: 1.2rem;
+      cursor: pointer;
+      box-shadow: 0 10px 30px rgba(0,245,255,0.35);
+      transition: 0.3s ease;
+      z-index: 100;
+    }
+
+    .floating-btn:hover {
+      transform: scale(1.1) rotate(8deg);
+    }
+
+    @media (max-width: 980px) {
+      .hero,
+      .grid-2,
+      .contact-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-right {
+        flex-direction: row;
+      }
+    }
+
+    @media (max-width: 680px) {
+      .hero-right {
+        flex-direction: column;
+      }
+
+      h1 {
+        font-size: 2.6rem;
+      }
+
+      .glass {
+        padding: 22px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="bg-grid"></div>
+  <div class="glow one"></div>
+  <div class="glow two"></div>
+
+  <div class="container">
+    <section class="hero">
+      <div class="glass">
+        <div class="tag">
+          <span class="pulse"></span>
+          Open To Opportunities
+        </div>
+
+        <h1>
+          Ankit <span class="gradient">Tyagi</span>
+        </h1>
+
+        <p class="subtitle">
+          AI enthusiast, tech learner, and future-focused professional passionate about building scalable digital solutions, exploring RAG systems, automation, prompt engineering, and modern product thinking. Blending creativity with technology to create impactful experiences.
+        </p>
+      </div>
+
+      <div class="hero-right">
+        <div class="glass stat">
+          <h2 id="experienceCounter">0+</h2>
+          <p>Years Learning & Building</p>
+        </div>
+
+        <div class="glass stat">
+          <h2 id="projectCounter">0+</h2>
+          <p>Projects & Experiments</p>
+        </div>
+
+        <div class="glass stat">
+          <h2>AI + Product</h2>
+          <p>Focused on modern workflows & innovation</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2 class="section-title">Professional Summary</h2>
+
+      <div class="glass">
+        <p class="subtitle">
+          Motivated and technology-driven professional with growing expertise in AI systems, prompt engineering, workflow automation, and product-oriented thinking. Strong interest in Retrieval-Augmented Generation (RAG), modern web experiences, and scalable problem solving. Adept at self-learning, experimentation, and adapting quickly to new tools and frameworks.
+        </p>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2 class="section-title">Core Skills</h2>
+
+      <div class="glass skill-card">
+        <div class="skills">
+          <div class="skill">Artificial Intelligence</div>
+          <div class="skill">RAG Concepts</div>
+          <div class="skill">Prompt Engineering</div>
+          <div class="skill">Product Thinking</div>
+          <div class="skill">HTML / CSS / JS</div>
+          <div class="skill">Workflow Automation</div>
+          <div class="skill">Problem Solving</div>
+          <div class="skill">Communication</div>
+          <div class="skill">UI/UX Awareness</div>
+          <div class="skill">Generative AI Tools</div>
+          <div class="skill">Analytical Thinking</div>
+          <div class="skill">Adaptability</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2 class="section-title">Experience & Learning Journey</h2>
+
+      <div class="grid-2">
+        <div class="glass experience-card">
+          <div class="role">AI & Product Learner</div>
+          <div class="company">Independent Learning Journey</div>
+          <div class="duration">2024 — Present</div>
+
+          <ul>
+            <li>Exploring Retrieval-Augmented Generation (RAG) architecture and AI workflows.</li>
+            <li>Experimenting with prompt engineering and AI-assisted content creation.</li>
+            <li>Learning modern product management concepts and digital solution design.</li>
+            <li>Building futuristic UI concepts and interactive web experiences.</li>
+          </ul>
+        </div>
+
+        <div class="glass experience-card">
+          <div class="role">Technology & Automation Enthusiast</div>
+          <div class="company">Self-Driven Projects</div>
+          <div class="duration">Ongoing</div>
+
+          <ul>
+            <li>Created creative AI prompts for image and video generation workflows.</li>
+            <li>Worked on futuristic invitation and visual storytelling concepts.</li>
+            <li>Continuously improving understanding of digital products and user experience.</li>
+            <li>Focused on combining creativity with technology for real-world applications.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2 class="section-title">Highlighted Projects</h2>
+
+      <div class="grid-2">
+        <div class="glass project-card">
+          <div class="project-title">Futuristic AI Resume</div>
+          <p class="subtitle">
+            Designed a modern cyberpunk-inspired personal portfolio resume with immersive UI, animations, and responsive layouts using a single HTML file.
+          </p>
+
+          <div class="project-tech">
+            <span>HTML</span>
+            <span>CSS</span>
+            <span>JavaScript</span>
+            <span>UI Design</span>
+          </div>
+        </div>
+
+        <div class="glass project-card">
+          <div class="project-title">AI Invitation & Creative Media Concepts</div>
+          <p class="subtitle">
+            Developed advanced prompts and cinematic visual concepts for AI-generated wedding invitations, event videos, and storytelling experiences.
+          </p>
+
+          <div class="project-tech">
+            <span>Prompt Engineering</span>
+            <span>Generative AI</span>
+            <span>Creative Direction</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2 class="section-title">Education</h2>
+
+      <div class="glass">
+        <div class="role">Professional & Self-Learning Development</div>
+        <div class="company">AI, Product, and Technology Focus</div>
+
+        <ul style="margin-top: 14px;">
+          <li>Focused learning in AI systems, product management concepts, and digital innovation.</li>
+          <li>Hands-on experimentation with modern tools and emerging technologies.</li>
+          <li>Continuous self-learning through projects, communities, and practical implementation.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2 class="section-title">Contact</h2>
+
+      <div class="contact-grid">
+        <div class="glass contact-card">
+          <h3>Email</h3>
+          <p>your.email@example.com</p>
+        </div>
+
+        <div class="glass contact-card">
+          <h3>Location</h3>
+          <p>Haryana, India</p>
+        </div>
+
+        <div class="glass contact-card">
+          <h3>LinkedIn</h3>
+          <a href="#">linkedin.com/in/yourprofile</a>
+        </div>
+
+        <div class="glass contact-card">
+          <h3>Portfolio</h3>
+          <a href="#">yourportfolio.com</a>
+        </div>
+      </div>
+    </section>
+
+    <div class="footer">
+      Designed with futuristic aesthetics • Built in a single HTML file • 2026
+    </div>
+  </div>
+
+  <button class="floating-btn" onclick="window.print()">
+    ⬇
+  </button>
+
+  <script>
+    const animateCounter = (id, endValue, duration) => {
+      const element = document.getElementById(id);
+      let start = 0;
+      const increment = endValue / (duration / 16);
+
+      const timer = setInterval(() => {
+        start += increment;
+
+        if (start >= endValue) {
+          element.textContent = endValue + '+';
+          clearInterval(timer);
+        } else {
+          element.textContent = Math.floor(start) + '+';
+        }
+      }, 16);
+    };
+
+    window.addEventListener('load', () => {
+      animateCounter('experienceCounter', 3, 1200);
+      animateCounter('projectCounter', 12, 1400);
+    });
+
+    document.addEventListener('mousemove', (e) => {
+      const glow = document.querySelector('.glow.one');
+      glow.style.transform = `translate(${e.clientX * 0.02}px, ${e.clientY * 0.02}px)`;
+    });
+  </script>
+</body>
+</html>
