@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Elegant Wedding Portrait</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+      font-family:'Poppins',sans-serif;
+    }
+
+    body{
+      min-height:100vh;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      background:
+        radial-gradient(circle at top left,#7c5cff 0%,transparent 30%),
+        radial-gradient(circle at bottom right,#ff5ea8 0%,transparent 30%),
+        linear-gradient(135deg,#0f172a,#111827,#1e293b);
+      overflow:hidden;
+      padding:30px;
+    }
+
+    .glow{
+      position:absolute;
+      width:500px;
+      height:500px;
+      border-radius:50%;
+      background:rgba(255,255,255,0.06);
+      filter:blur(120px);
+      animation:float 8s ease-in-out infinite;
+    }
+
+    .glow:nth-child(1){
+      top:-100px;
+      left:-100px;
+    }
+
+    .glow:nth-child(2){
+      bottom:-100px;
+      right:-100px;
+      animation-delay:3s;
+    }
+
+    @keyframes float{
+      0%,100%{
+        transform:translateY(0px);
+      }
+      50%{
+        transform:translateY(30px);
+      }
+    }
+
+    .card{
+      position:relative;
+      width:100%;
+      max-width:1200px;
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      background:rgba(255,255,255,0.08);
+      border:1px solid rgba(255,255,255,0.15);
+      backdrop-filter:blur(18px);
+      border-radius:30px;
+      overflow:hidden;
+      box-shadow:
+        0 15px 40px rgba(0,0,0,0.4),
+        inset 0 0 0 1px rgba(255,255,255,0.08);
+      animation:fadeUp 1.2s ease;
+    }
+
+    @keyframes fadeUp{
+      from{
+        opacity:0;
+        transform:translateY(50px);
+      }
+      to{
+        opacity:1;
+        transform:translateY(0);
+      }
+    }
+
+    .image-section{
+      position:relative;
+      overflow:hidden;
+    }
+
+    .image-section img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      transition:transform 0.8s ease;
+    }
+
+    .card:hover .image-section img{
+      transform:scale(1.05);
+    }
+
+    .overlay{
+      position:absolute;
+      inset:0;
+      background:linear-gradient(
+        to top,
+        rgba(0,0,0,0.5),
+        rgba(0,0,0,0.05)
+      );
+    }
+
+    .content{
+      padding:60px;
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      color:white;
+      position:relative;
+    }
+
+    .tag{
+      display:inline-block;
+      padding:8px 18px;
+      border-radius:50px;
+      background:rgba(255,255,255,0.12);
+      border:1px solid rgba(255,255,255,0.15);
+      font-size:14px;
+      width:max-content;
+      margin-bottom:22px;
+      letter-spacing:1px;
+      backdrop-filter:blur(10px);
+    }
+
+    h1{
+      font-size:54px;
+      line-height:1.1;
+      margin-bottom:20px;
+      font-weight:700;
+      background:linear-gradient(to right,#ffffff,#c4b5fd,#f9a8d4);
+      -webkit-background-clip:text;
+      -webkit-text-fill-color:transparent;
+    }
+
+    p{
+      color:rgba(255,255,255,0.78);
+      line-height:1.9;
+      font-size:16px;
+      margin-bottom:35px;
+    }
+
+    .buttons{
+      display:flex;
+      gap:18px;
+      flex-wrap:wrap;
+    }
+
+    button{
+      padding:15px 28px;
+      border:none;
+      border-radius:14px;
+      cursor:pointer;
+      font-size:15px;
+      font-weight:600;
+      transition:0.4s ease;
+    }
+
+    .primary{
+      background:linear-gradient(135deg,#7c5cff,#ff5ea8);
+      color:white;
+      box-shadow:0 10px 25px rgba(124,92,255,0.35);
+    }
+
+    .primary:hover{
+      transform:translateY(-4px) scale(1.03);
+    }
+
+    .secondary{
+      background:rgba(255,255,255,0.08);
+      color:white;
+      border:1px solid rgba(255,255,255,0.12);
+      backdrop-filter:blur(10px);
+    }
+
+    .secondary:hover{
+      background:rgba(255,255,255,0.16);
+      transform:translateY(-4px);
+    }
+
+    .floating-badge{
+      position:absolute;
+      top:25px;
+      right:25px;
+      background:rgba(255,255,255,0.12);
+      backdrop-filter:blur(15px);
+      border:1px solid rgba(255,255,255,0.18);
+      color:white;
+      padding:12px 20px;
+      border-radius:18px;
+      font-size:14px;
+      font-weight:500;
+      animation:pulse 2.5s infinite;
+    }
+
+    @keyframes pulse{
+      0%{
+        transform:scale(1);
+      }
+      50%{
+        transform:scale(1.05);
+      }
+      100%{
+        transform:scale(1);
+      }
+    }
+
+    .shine{
+      position:absolute;
+      top:-120%;
+      left:-40%;
+      width:120px;
+      height:300%;
+      background:rgba(255,255,255,0.15);
+      transform:rotate(25deg);
+      animation:shine 5s infinite;
+    }
+
+    @keyframes shine{
+      0%{
+        left:-40%;
+      }
+      100%{
+        left:140%;
+      }
+    }
+
+    @media(max-width:900px){
+      .card{
+        grid-template-columns:1fr;
+      }
+
+      .content{
+        padding:40px 30px;
+      }
+
+      h1{
+        font-size:40px;
+      }
+    }
+
+    @media(max-width:500px){
+      h1{
+        font-size:32px;
+      }
+
+      p{
+        font-size:14px;
+      }
+
+      .buttons{
+        flex-direction:column;
+      }
+
+      button{
+        width:100%;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="glow"></div>
+  <div class="glow"></div>
+
+  <div class="card">
+
+    <div class="image-section">
+      <!-- Replace image path with your image -->
+      <img src="52c1bc83-9041-45a8-95d6-6b7af52d4b83.JPG" alt="Wedding Portrait">
+
+      <div class="overlay"></div>
+      <div class="shine"></div>
+    </div>
+
+    <div class="content">
+
+      <div class="floating-badge">
+        ✨ Elegant Portrait
+      </div>
+
+      <div class="tag">
+        Royal Wedding Memories
+      </div>
+
+      <h1>
+        Timeless <br>
+        Wedding Elegance
+      </h1>
+
+      <p>
+        A beautiful royal portrait capturing the bond, celebration,
+        and elegance of a memorable wedding moment. Designed with
+        a futuristic glassmorphism UI and luxury visual aesthetics.
+      </p>
+
+      <div class="buttons">
+        <button class="primary" onclick="showMessage()">
+          View Story
+        </button>
+
+        <button class="secondary" onclick="downloadPhoto()">
+          Download
+        </button>
+      </div>
+
+    </div>
+
+  </div>
+
+  <script>
+    function showMessage(){
+      alert("✨ A beautiful wedding memory captured forever!");
+    }
+
+    function downloadPhoto(){
+      const link = document.createElement("a");
+      link.href = "52c1bc83-9041-45a8-95d6-6b7af52d4b83.JPG";
+      link.download = "wedding-portrait.jpg";
+      link.click();
+    }
+  </script>
+
+</body>
+</html>
